@@ -56,7 +56,7 @@ const APTest = () => {
             .then((resdata) => {
                 setT(resdata);
                 console.log(resdata);
-                // 就是没法正则匹配上，很烦
+                // 在main上修改
                 while ((srcMatch = srcRegex.exec(resdata)) !== null && (titleMatch = titleRegex.exec(resdata)) !== null) {
                     setTitleResults((titleResults) => [...titleResults, titleMatch[1].replace(/220_140/g, '1600_10000')]);
                     setSrcResults((srcResults) => [...srcResults, srcMatch[1]]);
