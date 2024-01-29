@@ -5,33 +5,17 @@ import React from 'react';
 import { Alert, View, StyleSheet, Image, ScrollView, Text, TouchableOpacity } from 'react-native';
 import { SearchBar, Carousel, NoticeBar, Tabs } from '@ant-design/react-native';
 import ImageContainer from '../components/homepage/ImageContainer';
+import ImageContainer2 from '../components/homepage/CC';
 import Options from '../components/homepage/Options';
 
-// const renderContent = (tab: any, index: any) => {
-//   const style = {
-//     paddingVertical: 40,
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//     margin: 10,
-//     backgroundColor: '#ddd',
-//   }
-//   const content = [1, 2, 3, 4, 5, 6, 7, 8].map((i) => {
-//     return (
-//       <View key={`${index}_${i}`} style={style}>
-//         <Text>
-//           {tab.title} - {i}
-//         </Text>
-//       </View>
-//     )
-//   })
-//   return (
-//     <ScrollView key={index} style={{ backgroundColor: '#fff' }}>
-//       {content}
-//     </ScrollView>
-//   )
-// }
-
 export default class Home extends React.Component<any, any> {
+  ImageRef: React.RefObject<unknown>;
+
+  constructor(props: any) {
+    super(props);
+    this.ImageRef = React.createRef();
+  }
+
   carousel: Carousel | null;
   state = {
     value: '',
@@ -60,7 +44,8 @@ export default class Home extends React.Component<any, any> {
       <View style={styles.container}>
         <Text style={styles.title}>旅游</Text>
         <View style={styles.mainBody}>
-          <ScrollView>
+          <ScrollView
+          >
             <View style={{ position: 'relative' }}>
               <Carousel
                 style={styles.wrapper}
@@ -90,7 +75,7 @@ export default class Home extends React.Component<any, any> {
                 onSubmit={(value: any) => Alert.alert(value)}
                 onCancel={() => { this.setState({ value: '' }) }}
                 onChange={this.onChange}
-                placeholder='搜一搜'
+                placeholder="搜一搜"
                 style={{ display: 'flex' }}
               />
             </View>
@@ -134,11 +119,10 @@ export default class Home extends React.Component<any, any> {
                 </View>
               )}>
               <View >
-                {/* <Image source={require('../media/images/home/bg1.jpg')} /> */}
                 <ImageContainer />
               </View>
               <View >
-                <Text>Content of Second Tab</Text>
+                <ImageContainer2 isEnd={false} />
               </View>
               <View >
                 <Text>Content of Third Tab</Text>
@@ -147,8 +131,6 @@ export default class Home extends React.Component<any, any> {
                 <Text>Content of fourth Tab</Text>
               </View>
             </Tabs>
-
-            {/* <ImageContainer /> */}
           </ScrollView>
         </View>
       </View>

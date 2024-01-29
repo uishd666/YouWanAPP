@@ -9,4 +9,4 @@ import APP from './AppPages/index';
 import APTest from './APTest';
 import ZZTest from './ZZTest';
 
-AppRegistry.registerComponent(appName, () => APTest);
+AppRegistry.registerComponent(appName, () => APP);

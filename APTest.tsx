@@ -13,7 +13,6 @@ const APTest = () => {
     const [urlIdx, setUrlIdx] = useState(0);
     const [pageLoadingFull, setPageLoadingFull] = useState(false);
     const [pageLoading, setPageLoading] = useState(false);
-    const [t, setT] = useState();
 
     const srcRegex = /<a href(.*?)">/g;
     const titleRegex = /<span class="ellipsis" title="([^"]+)">/g;
@@ -54,9 +53,7 @@ const APTest = () => {
         })
             .then((response) => response.text())
             .then((resdata) => {
-                setT(resdata);
-                console.log(resdata);
-                // 在main上修改，记录
+                // console.log(resdata);
                 while ((srcMatch = srcRegex.exec(resdata)) !== null && (titleMatch = titleRegex.exec(resdata)) !== null) {
                     setTitleResults((titleResults) => [...titleResults, titleMatch[1].replace(/220_140/g, '1600_10000')]);
                     setSrcResults((srcResults) => [...srcResults, srcMatch[1]]);
@@ -78,7 +75,7 @@ const APTest = () => {
     const ImageData = srcResults.map((src, idx) => ({
         icon: <Image source={{ uri: src }} style={styles.GridImage} key={idx} />,
         text: <Text style={styles.GridText}>{titleResults[idx]}</Text>,
-    }))
+    }));
 
     return (
         <ScrollView
@@ -90,7 +87,6 @@ const APTest = () => {
                 hasLine={false}
                 columnNum={2}
             ></Grid>
-            <Text>{t}</Text>
         </ScrollView>
     );
 };
@@ -106,4 +102,4 @@ const styles = StyleSheet.create({
         fontSize: 15,
         color: 'grey',
     },
-})
+});
