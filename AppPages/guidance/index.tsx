@@ -1,7 +1,6 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
-import ImageContainer from '../components/homepage/ImageContainer';
-import ImageContainer2 from '../components/homepage/CC';
+import BgMap from '../components/guidance/BgMap';
 import { ScrollView } from 'react-native';
 
 export default class Guidance extends React.Component<any, any> {
@@ -11,7 +10,7 @@ export default class Guidance extends React.Component<any, any> {
             <>
                 <ScrollView>
 
-                    <ImageContainer2 />
+                    <BgMap />
                 </ScrollView>
 
             </>
