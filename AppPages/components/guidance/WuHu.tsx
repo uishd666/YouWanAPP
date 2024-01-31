@@ -1,8 +1,8 @@
-/* eslint-disable no-sparse-arrays */
+/* eslint-disable prettier/prettier */
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable prettier/prettier */
 import React, { useEffect, useRef, useState } from 'react';
-import { StyleSheet, View, Animated, Dimensions, Text, TouchableOpacity, Alert, ScrollView, Image } from 'react-native';
+import { StyleSheet, View, Animated, Dimensions, Text, TouchableOpacity, Image } from 'react-native';
 
 const screenWidth = Dimensions.get('window').width;
 
@@ -19,7 +19,7 @@ const contentJson = [
     { title: '黄金塔', contact: '', content: '    黄金塔，位于安徽省芜湖市无为市无城镇凤河行政村东侧的西河之畔，始建于北宋咸平元年（998年），明清以来有多次修葺，自20世纪80年代后，政府大力支持修复保护。\n    黄金塔呈平面六边形，面阔3.4米，塔高37米，共9层，一二层、二三层之间为双层腰檐，腰檐层层仿木斗拱均为鸳鸯交手，底层半侧设佛龛室，二层内壁东、南、北侧各置一佛龛座，顶部有木质藻井。塔内原有一些建塔碑记，后均散佚。黄金塔是安徽省已知现存佛塔建筑之一，具有宋代仿木楼阁式夸塔的典型特征，是研究中国佛教建筑史的重要实物例证。\n    1981年，黄金塔被安徽省政府定为安徽省重点文物保护单位。 2013年5月，黄金塔被中华人民共和国国务院公布为第七批全国重点文物保护单位。', img: require('../../media/images/guidance/黄金塔.jpg') },
 ];
 
-const BgMap = () => {
+const WuHu = () => {
     const scale = useRef(new Animated.Value(1)).current;
     const pan = useRef(new Animated.ValueXY()).current;
     const height = useRef(new Animated.Value(100)).current;
@@ -27,7 +27,7 @@ const BgMap = () => {
     const [showup, setShowup] = useState(false);
     const [selection, setSelection] = useState(0);
 
-    const handleTouch = (event) => {
+    const handleTouch = (event: any) => {
         if (scale._value < 1.1) {
             const { locationX, locationY } = event.nativeEvent;
             Animated.parallel([
@@ -36,7 +36,7 @@ const BgMap = () => {
                     useNativeDriver: true,
                 }),
                 Animated.timing(pan, {
-                    toValue: { x: - locationX + screenWidth / 2, y: - locationY + 160 },
+                    toValue: { x: -locationX + screenWidth / 2, y: -locationY + 160 },
                     duration: 800,
                     useNativeDriver: true,
                 }),
@@ -119,7 +119,7 @@ const BgMap = () => {
     );
 };
 
-export default BgMap;
+export default WuHu;
 
 const styles = StyleSheet.create({
     TextContainer: {
