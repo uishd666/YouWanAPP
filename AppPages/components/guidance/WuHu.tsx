@@ -108,12 +108,13 @@ const WuHu = () => {
 
                 {showup && <View>
                     <Text style={styles.TextTitle}>{contentJson[selection].title}</Text>
+                    <Text style={styles.TextContact}>{`联系方式  ——  ${contentJson[selection].contact}\n`}</Text>
+                    <Image source={contentJson[selection].img} style={styles.TextImg} />
                     <Text style={styles.TextContent}>
-                        {`联系方式——${contentJson[selection].contact}\n`}
                         {contentJson[selection].content}
+                        {'\n\n\n'}
                     </Text>
                 </View>}
-                {showup && <Image source={contentJson[selection].img} style={styles.TextImg} />}
             </Animated.ScrollView>
         </>
     );
@@ -138,10 +139,22 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: 'black',
     },
+    TextContact: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: 'blue',
+        alignContent: 'center',
+        justifyContent: 'center',
+        margin: 10,
+    },
     TextContent: {
         fontSize: 20,
+        alignContent: 'center',
+        justifyContent: 'center',
+        margin: 10,
     },
     TextImg: {
         width: screenWidth,
+        margin: 10,
     },
 })

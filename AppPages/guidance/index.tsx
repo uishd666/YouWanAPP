@@ -5,38 +5,18 @@ import React from 'react';
 import WuHu from '../components/guidance/WuHu';
 import AnHui from '../components/guidance/AnHui';
 import { BackHandler, Text, TouchableOpacity, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 export default class Guidance extends React.Component<any, any> {
-
-    componentDidMount() {
-        BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
-    }
-
-    componentWillUnmount() {
-        BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
-    }
-
-    handleBackButton = () => {
-        if (!this.state.showup) {
-            this.setState({ selection: 'AnHui', pressDisabled: false, showup: true });
-            return true;
-        }
-        else {
-            BackHandler.exitApp();
-        }
-    };
-
-
     state = {
-        showup: true,
         selection: 'AnHui',
-        pressDisabled: false,
     };
 
     dict = {
-        'AnHui': 0,
-        'Empty': 1,
-        'WuHu': 2,
+        'AnHui': { idx: 0, location: '安徽' },
+        'Empty': { idx: 1, location: '敬请期待' },
+        'WuHu': { idx: 2, location: '芜湖' },
     };
 
     contentList = [
@@ -45,19 +25,52 @@ export default class Guidance extends React.Component<any, any> {
         <View style={{ backgroundColor: '#f3eef4', height: '100%' }}><WuHu /></View>,
     ];
 
+    stack = createNativeStackNavigator();
+
+    funcAnHui = (props) => {
+        const { navigation } = props;
+
+        return (
+            <TouchableOpacity onPress={(event) => {
+                const { locationX, locationY } = event.nativeEvent;
+                if (Math.abs(locationX - 300) <= 20 && Math.abs(locationY - 430) <= 20) {
+                    this.setState({ selection: 'WuHu' });
+                }
+                else {
+                    this.setState({ selection: 'Empty' });
+                }
+                navigation.navigate('Location');
+
+            }}
+                activeOpacity={1}>
+                {this.contentList[0]}
+            </TouchableOpacity>
+        );
+    };
+
+    funcLocation = () => {
+        return (
+            <View style={{ backgroundColor: '#f3eef4', height: '100%' }}><WuHu /></View>
+        );
+    };
+
     render(): React.ReactNode {
         return (
-            <>
-                <TouchableOpacity onPress={this.handlePress} activeOpacity={1} disabled={this.state.pressDisabled}>
-                    {this.contentList[this.dict[this.state.selection]]}
-                </TouchableOpacity>
-            </>
+            <NavigationContainer>
+                <this.stack.Navigator
+                    screenOptions={{
+                        headerTitleAlign: 'center',
+                    }}
+                >
+                    <this.stack.Screen name="AnHui" options={{ title: '安徽' }}>
+                        {(props) => <this.funcAnHui {...props} />}
+                    </this.stack.Screen>
+                    <this.stack.Screen name="Location" options={{ title: this.dict[this.state.selection].location }}>
+                        {() => this.contentList[this.dict[this.state.selection].idx]}
+                    </this.stack.Screen>
+                </this.stack.Navigator>
+            </NavigationContainer>
         );
-    }
-
-    handlePress = (event) => {
-        console.log(event.nativeEvent.locationX);
-        this.setState({ selection: 'WuHu', pressDisabled: true, showup: false });
     }
 
 }
