@@ -8,7 +8,7 @@ export default class AnHui extends Component {
     render(): React.ReactNode {
         return (
             <>
-                <Image source={require('../../media/images/guidance/安徽.jpg')} style={[styles.BgImg, { width: this.screenWidth }]} />
+                <Image source={require('../../../android/app/src/main/res/drawable/media/images/guidance/安徽.jpg')} style={[styles.BgImg, { width: this.screenWidth }]} />
             </>
         )
     }

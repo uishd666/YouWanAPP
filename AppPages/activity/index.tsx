@@ -5,12 +5,21 @@ import { View, Text, ScrollView, Image, StyleSheet, TouchableOpacity } from 'rea
 import { Card, Button, Grid, Tabs } from '@ant-design/react-native';
 
 const EnvJson = [
-    { img: require('../media/icons/activity/windforce.png'), title: '风力等级', data: '1级' },
-    { img: require('../media/icons/activity/pm25.png'), title: 'PM2.5', data: '37ug/m' },
-    { img: require('../media/icons/activity/humidity.png'), title: '湿度', data: '61%' },
-    { img: require('../media/icons/activity/airpressure.png'), title: '气压', data: '1hpa' },
-    { img: require('../media/icons/activity/out.png'), title: '出行', data: '良' },
-    { img: require('../media/icons/activity/airpollution.png'), title: '空气污染', data: '60' },
+    { img: require('../../android/app/src/main/res/drawable/media/icons/activity/windforce.png'), title: '风力等级', data: '1级' },
+    { img: require('../../android/app/src/main/res/drawable/media/icons/activity/pm25.png'), title: 'PM2.5', data: '37ug/m' },
+    { img: require('../../android/app/src/main/res/drawable/media/icons/activity/humidity.png'), title: '湿度', data: '61%' },
+    { img: require('../../android/app/src/main/res/drawable/media/icons/activity/airpressure.png'), title: '气压', data: '1hpa' },
+    { img: require('../../android/app/src/main/res/drawable/media/icons/activity/out.png'), title: '出行', data: '良' },
+    { img: require('../../android/app/src/main/res/drawable/media/icons/activity/airpollution.png'), title: '空气污染', data: '60' },
+];
+
+const TripJson = [
+    { img: require('../../android/app/src/main/res/drawable/media/icons/activity/clothes.png'), title: '穿衣', data: '初冬装' },
+    { img: require('../../android/app/src/main/res/drawable/media/icons/activity/glasses.png'), title: '防晒', data: 'SPF>15' },
+    { img: require('../../android/app/src/main/res/drawable/media/icons/activity/hills.png'), title: '旅游', data: '适宜' },
+    { img: require('../../android/app/src/main/res/drawable/media/icons/activity/ball.png'), title: '运动', data: '较适宜' },
+    { img: require('../../android/app/src/main/res/drawable/media/icons/activity/fish.png'), title: '钓鱼', data: '不适宜' },
+    { img: require('../../android/app/src/main/res/drawable/media/icons/activity/car.png'), title: '洗车', data: '较适宜' },
 ];
 
 export default class Activity extends React.Component<any, any> {
@@ -25,18 +34,28 @@ export default class Activity extends React.Component<any, any> {
         </View>,
     }));
 
+    TripData = TripJson.map((item) => ({
+        icon: <View style={styles.EnvContainer}>
+            <Image source={item.img} style={styles.EnvIcon} />
+            <View style={styles.EnvText}>
+                <Text style={{ fontSize: 18 }}>{item.title}</Text>
+                <Text style={{ fontSize: 16, fontWeight: 'bold' }}>{item.data}</Text>
+            </View>
+        </View>,
+    }));
+
     render(): React.ReactNode {
         const twoData = [
             {
                 icon: <View style={styles.twoContainer}>
                     <Text style={styles.twoText}>服务导航</Text>
-                    <Image source={require('../media/icons/map.png')} style={styles.twoIcon} />
+                    <Image source={require('../../android/app/src/main/res/drawable/media/icons/map.png')} style={styles.twoIcon} />
                 </View>
             },
             {
                 icon: <View style={styles.twoContainer}>
                     <Text style={styles.twoText}>在线咨询</Text>
-                    <Image source={require('../media/icons/consult.png')} style={styles.twoIcon} />
+                    <Image source={require('../../android/app/src/main/res/drawable/media/icons/consult.png')} style={styles.twoIcon} />
                 </View>
             }
         ];
@@ -52,7 +71,7 @@ export default class Activity extends React.Component<any, any> {
                     <Card full>
                         <Card.Body>
                             <View style={{ height: 200, flexGrow: 1 }}>
-                                <Image source={require('../media/images/home/bg1.jpg')} resizeMode="cover" style={{ flex: 1, width: '100%' }} />
+                                <Image source={require('../../android/app/src/main/res/drawable/media/images/home/bg1.jpg')} resizeMode="cover" style={{ flex: 1, width: '100%' }} />
                             </View>
                         </Card.Body>
                         <Card.Footer
@@ -82,10 +101,15 @@ export default class Activity extends React.Component<any, any> {
                             />
                         </View>
                         <View>
-                            <Text>Content of Second Tab</Text>
+                            <Grid
+                                data={this.TripData}
+                                columnNum={2}
+                                hasLine={false}
+                                itemStyle={{ height: 100 }}
+                            />
                         </View>
                     </Tabs>
-                    <Text>\n\n</Text>
+                    <Text>/n/n</Text>
                 </ScrollView>
             </View>
         )

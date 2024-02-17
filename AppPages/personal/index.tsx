@@ -11,38 +11,38 @@ const InfoJson = {
 };
 
 const OrderJson = [
-    { icon: require('../media/icons/personal/affirm.png'), text: '待确认' },
-    { icon: require('../media/icons/personal/pay.png'), text: '待付款' },
-    { icon: require('../media/icons/personal/consumption.png'), text: '待消费' },
-    { icon: require('../media/icons/personal/comment.png'), text: '待点评' },
-    { icon: require('../media/icons/personal/refund.png'), text: '退款单' },
+    { icon: require('../../android/app/src/main/res/drawable/media/icons/personal/affirm.png'), text: '待确认' },
+    { icon: require('../../android/app/src/main/res/drawable/media/icons/personal/pay.png'), text: '待付款' },
+    { icon: require('../../android/app/src/main/res/drawable/media/icons/personal/consumption.png'), text: '待消费' },
+    { icon: require('../../android/app/src/main/res/drawable/media/icons/personal/comment.png'), text: '待点评' },
+    { icon: require('../../android/app/src/main/res/drawable/media/icons/personal/refund.png'), text: '退款单' },
 ];
 
 const OutJson = [
-    { icon: require('../media/icons/personal/trip.png'), text: '我的游记' },
-    { icon: require('../media/icons/personal/favorite.png'), text: '我的收藏' },
-    { icon: require('../media/icons/personal/linkman.png'), text: '常用联系人' },
-    { icon: require('../media/icons/personal/address.png'), text: '常用地址' },
-    { icon: require('../media/icons/personal/invoice.png'), text: '常用发票' },
-    { icon: require('../media/icons/personal/contact.png'), text: '联系我们' },
-    { icon: require('../media/icons/personal/hotline.png'), text: '服务热线' },
+    { icon: require('../../android/app/src/main/res/drawable/media/icons/personal/trip.png'), text: '我的游记' },
+    { icon: require('../../android/app/src/main/res/drawable/media/icons/personal/favorite.png'), text: '我的收藏' },
+    { icon: require('../../android/app/src/main/res/drawable/media/icons/personal/linkman.png'), text: '常用联系人' },
+    { icon: require('../../android/app/src/main/res/drawable/media/icons/personal/address.png'), text: '常用地址' },
+    { icon: require('../../android/app/src/main/res/drawable/media/icons/personal/invoice.png'), text: '常用发票' },
+    { icon: require('../../android/app/src/main/res/drawable/media/icons/personal/contact.png'), text: '联系我们' },
+    { icon: require('../../android/app/src/main/res/drawable/media/icons/personal/hotline.png'), text: '服务热线' },
 ];
 
 const ListJson = [
-    { icon: require('../media/icons/personal/reserve.png'), text: '我的预约' },
-    { icon: require('../media/icons/personal/activity.png'), text: '我的活动' },
-    { icon: require('../media/icons/personal/complaint.png'), text: '投诉' },
-    { icon: require('../media/icons/personal/rescure.png'), text: '一键求救' },
+    { icon: require('../../android/app/src/main/res/drawable/media/icons/personal/reserve.png'), text: '我的预约' },
+    { icon: require('../../android/app/src/main/res/drawable/media/icons/personal/activity.png'), text: '我的活动' },
+    { icon: require('../../android/app/src/main/res/drawable/media/icons/personal/complaint.png'), text: '投诉' },
+    { icon: require('../../android/app/src/main/res/drawable/media/icons/personal/rescure.png'), text: '一键求救' },
 ]
 
 export default class Personal extends React.Component<any, any> {
-    OrderData = OrderJson.map((item) => ({
-        icon: <Image source={item.icon} style={styles.OrderIcon} />,
+    OrderData = OrderJson.map((item, idx) => ({
+        icon: <Image source={item.icon} style={styles.OrderIcon} key={idx} />,
         text: item.text,
     }));
 
-    OutData = OutJson.map((item) => ({
-        icon: <Image source={item.icon} style={styles.OutIcon} />,
+    OutData = OutJson.map((item, idx) => ({
+        icon: <Image source={item.icon} style={styles.OutIcon} key={idx * 2 + 1} />,
         text: item.text,
     }));
 

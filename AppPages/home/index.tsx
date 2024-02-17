@@ -2,11 +2,12 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import { Alert, View, StyleSheet, Image, ScrollView, Text, TouchableOpacity } from 'react-native';
-import { SearchBar, Carousel, NoticeBar, Tabs } from '@ant-design/react-native';
-import ImageContainer from '../components/homepage/ImageContainer';
-import ImageContainer2 from '../components/homepage/CC';
+import { Alert, View, StyleSheet, Image, ScrollView, Text, TouchableOpacity, Dimensions } from 'react-native';
+import { SearchBar, Carousel, NoticeBar, Tabs, Grid } from '@ant-design/react-native';
 import Options from '../components/homepage/Options';
+import FoodEG from '../components/homepage/FoodEG';
+import ImageEG from '../components/homepage/ImageEG';
+import HotelEG from '../components/homepage/HotelEG';
 
 export default class Home extends React.Component<any, any> {
   ImageRef: React.RefObject<unknown>;
@@ -21,6 +22,7 @@ export default class Home extends React.Component<any, any> {
     value: '',
     selectedIndex: 1,
     autoplay: true,
+    activeTab: 0,
   };
 
   onChange = (value: any) => {
@@ -53,19 +55,18 @@ export default class Home extends React.Component<any, any> {
                 autoplay
                 infinite
                 afterChange={this.onHorizontalSelectedIndexChange}
-              // ref={(ref) => (this.carousel = ref)}
               >
                 <View
                   style={[styles.containerHorizontal]}>
-                  <Image source={require('../media/images/home/bg1.jpg')} resizeMode="cover" style={{ width: '100%', height: '100%' }} />
+                  <Image source={require('../../android/app/src/main/res/drawable/media/images/home/bg1.jpg')} resizeMode="cover" style={{ width: '100%', height: '100%' }} />
                 </View>
                 <View
                   style={[styles.containerHorizontal]}>
-                  <Image source={require('../media/images/home/bg2.jpg')} resizeMode="cover" style={{ width: '100%', height: '100%' }} />
+                  <Image source={require('../../android/app/src/main/res/drawable/media/images/home/bg2.jpg')} resizeMode="cover" style={{ width: '100%', height: '100%' }} />
                 </View>
                 <View
                   style={[styles.containerHorizontal]}>
-                  <Image source={require('../media/images/home/bg3.jpg')} resizeMode="cover" style={{ width: '100%', height: '100%' }} />
+                  <Image source={require('../../android/app/src/main/res/drawable/media/images/home/bg3.jpg')} resizeMode="cover" style={{ width: '100%', height: '100%' }} />
                 </View>
               </Carousel>
             </View>
@@ -84,7 +85,9 @@ export default class Home extends React.Component<any, any> {
 
             <Tabs
               tabs={tabs}
-              renderTabBar={(tabProps) => (
+              prerenderingSiblingsNumber={0}
+              renderTabBar={(tabProps) =>
+              (
                 <View
                   style={{
                     paddingHorizontal: 16,
@@ -93,7 +96,6 @@ export default class Home extends React.Component<any, any> {
                     justifyContent: 'space-evenly',
                   }}>
                   {tabProps.tabs.map((tab, i) => (
-                    // change the style to fit your needs
                     <TouchableOpacity
                       activeOpacity={0.9}
                       key={tab.key || i}
@@ -107,6 +109,8 @@ export default class Home extends React.Component<any, any> {
                         onTabClick && onTabClick(tabs[i], i)
                         // tslint:disable-next-line:no-unused-expression
                         goToTab && goToTab(i)
+                        this.setState({ activeTab: i });
+
                       }}>
                       <Text
                         style={{
@@ -115,17 +119,19 @@ export default class Home extends React.Component<any, any> {
                         {tab.title}
                       </Text>
                     </TouchableOpacity>
-                  ))}
+                  )
+                  )}
                 </View>
-              )}>
+              )
+              }>
               <View >
-                <ImageContainer />
+                <ImageEG />
               </View>
               <View >
-                <ImageContainer2 isEnd={false} />
+                <HotelEG />
               </View>
               <View >
-                <Text>Content of Third Tab</Text>
+                <FoodEG />
               </View>
               <View >
                 <Text>Content of fourth Tab</Text>
@@ -180,5 +186,13 @@ const styles = StyleSheet.create({
   },
   notice: {
     backgroundColor: 'rgba(0,255,0,0.1)',
+  },
+  GridImage: {
+    width: '95%',
+    height: '65%',
+  },
+  GridText: {
+    fontSize: 15,
+    color: 'grey',
   },
 })

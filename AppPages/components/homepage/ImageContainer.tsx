@@ -4,7 +4,7 @@
 /* eslint-disable react/self-closing-comp */
 /* eslint-disable prettier/prettier */
 import React, { useEffect, useRef, useState } from 'react';
-import { View, Image, StyleSheet, Text, ScrollView } from 'react-native';
+import { View, Image, StyleSheet, Text, ScrollView, TouchableOpacity } from 'react-native';
 import { Button, Grid } from '@ant-design/react-native';
 
 const ImageContainer = () => {
@@ -44,15 +44,21 @@ const ImageContainer = () => {
     }));
 
     return (
-        <View>
-            <ScrollView>
-                <Grid
-                    data={ImageData}
-                    hasLine={false}
-                    columnNum={2}
-                ></Grid>
-            </ScrollView>
-        </View>
+
+        <>
+            <Grid
+                data={ImageData}
+                hasLine={false}
+                columnNum={2}
+            ></Grid>
+            <TouchableOpacity>
+                <Text>
+                    点击加载更多
+                </Text>
+            </TouchableOpacity>
+            <Text>{'\n\n'}</Text>
+        </>
+
     );
 };
 

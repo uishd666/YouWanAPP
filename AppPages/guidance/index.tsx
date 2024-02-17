@@ -33,7 +33,8 @@ export default class Guidance extends React.Component<any, any> {
         return (
             <TouchableOpacity onPress={(event) => {
                 const { locationX, locationY } = event.nativeEvent;
-                if (Math.abs(locationX - 300) <= 20 && Math.abs(locationY - 430) <= 20) {
+
+                if (Math.abs(locationX - 226) <= 20 && Math.abs(locationY - 406) <= 20) {
                     this.setState({ selection: 'WuHu' });
                 }
                 else {
