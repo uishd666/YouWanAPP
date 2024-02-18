@@ -1,7 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable prettier/prettier */
 import React from 'react';
-import { View, Text, ScrollView, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, ScrollView, Image, StyleSheet, TouchableOpacity, TextInput, Dimensions } from 'react-native';
 import { Card, Button, Grid, Tabs } from '@ant-design/react-native';
 
 const EnvJson = [
@@ -44,19 +44,33 @@ export default class Activity extends React.Component<any, any> {
         </View>,
     }));
 
+    state = {
+        txt: '',
+        plans: [],
+        cnt: 0,
+    };
+
+    textInputRef = React.createRef();
+
+    AddTodo = () => {
+        this.textInputRef.current.clear();
+        if (this.state.txt.trim() === '') return;
+        this.setState({ plans: [this.state.txt, ...this.state.plans], cnt: this.state.cnt + 1, txt: '' });
+    };
+
     render(): React.ReactNode {
         const twoData = [
             {
                 icon: <View style={styles.twoContainer}>
                     <Text style={styles.twoText}>服务导航</Text>
                     <Image source={require('../../android/app/src/main/res/drawable/media/icons/map.png')} style={styles.twoIcon} />
-                </View>
+                </View>,
             },
             {
                 icon: <View style={styles.twoContainer}>
                     <Text style={styles.twoText}>在线咨询</Text>
                     <Image source={require('../../android/app/src/main/res/drawable/media/icons/consult.png')} style={styles.twoIcon} />
-                </View>
+                </View>,
             }
         ];
 
@@ -79,12 +93,35 @@ export default class Activity extends React.Component<any, any> {
                             extra={<TouchableOpacity onPress={() => console.log('全部计划')} style={{ alignItems: 'flex-end' }}><Text>全部计划</Text></TouchableOpacity>}
                         />
                     </Card>
-                    <View style={styles.buttonContainer}><Button type="primary"><Text style={{ fontSize: 15, color: 'white' }}>+ 新增计划</Text></Button></View>
+                    <View style={styles.buttonContainer}>
+                        <TextInput
+                            ref={this.textInputRef}
+                            style={styles.planInput}
+                            placeholder="请输入新的计划！"
+                            onChangeText={(text) => {
+                                this.setState({ txt: text });
+                            }}
+                        />
+                        <Button type="primary" onPress={this.AddTodo}>
+                            <Text style={{ fontSize: 15, color: 'white' }}>
+                                + 新增计划
+                            </Text>
+                        </Button>
+                        {
+                            this.state.plans.slice(0, 3).map((plan, idx) => (
+                                <View key={idx}>
+                                    <Text>
+                                        {plan}
+                                    </Text>
+                                </View>
+                            ))
+                        }
+                    </View>
                     <View style={{ height: 50, margin: 15 }}>
                         <Text style={{ marginBottom: 10, fontSize: 17, fontWeight: 'bold' }}>我的计划</Text>
                         <Text>用心探索每一座城市</Text>
                     </View>
-                    <View style={{ width: '100%', backgroundColor: 'grey', height: 5 }}></View>
+                    <View style={{ width: '100%', backgroundColor: 'grey', height: 5 }} />
                     <Grid
                         data={twoData}
                         columnNum={2}
@@ -131,6 +168,14 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginTop: 10,
         marginBottom: 10,
+    },
+    planInput: {
+        borderTopWidth: 2,
+        borderBottomWidth: 2,
+        borderColor: 'gray',
+        width: Dimensions.get('screen').width,
+        margin: 10,
+        paddingHorizontal: 20,
     },
     twoContainer: {
         alignItems: 'center',
