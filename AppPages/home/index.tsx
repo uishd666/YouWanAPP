@@ -10,6 +10,7 @@ import Options from '../components/homepage/Options';
 import FoodEG from '../components/homepage/FoodEG';
 import ImageEG from '../components/homepage/ImageEG';
 import HotelEG from '../components/homepage/HotelEG';
+import MallEG from '../components/homepage/MallEG';
 import WebView from 'react-native-webview';
 
 export default class Home extends React.Component<any, any> {
@@ -151,7 +152,7 @@ export default class Home extends React.Component<any, any> {
                 <FoodEG />
               </View>
               <View >
-                <Text>Content of fourth Tab</Text>
+                <MallEG />
               </View>
             </Tabs>
           </ScrollView>

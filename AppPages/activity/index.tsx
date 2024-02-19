@@ -2,7 +2,7 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
 import { View, Text, ScrollView, Image, StyleSheet, TouchableOpacity, TextInput, Dimensions } from 'react-native';
-import { Card, Button, Grid, Tabs } from '@ant-design/react-native';
+import { Card, Button, Grid, Tabs, Checkbox } from '@ant-design/react-native';
 
 const EnvJson = [
     { img: require('../../android/app/src/main/res/drawable/media/icons/activity/windforce.png'), title: '风力等级', data: '1级' },
@@ -46,16 +46,18 @@ export default class Activity extends React.Component<any, any> {
 
     state = {
         txt: '',
-        plans: [],
+        plans: [{ plan: '参观芜湖铁画艺术厂', id: 0 }],
         cnt: 0,
     };
+
+    donePlans = [];
 
     textInputRef = React.createRef();
 
     AddTodo = () => {
         this.textInputRef.current.clear();
         if (this.state.txt.trim() === '') return;
-        this.setState({ plans: [this.state.txt, ...this.state.plans], cnt: this.state.cnt + 1, txt: '' });
+        this.setState({ plans: [{ plan: this.state.txt, id: this.state.cnt + 1 }, ...this.state.plans], cnt: this.state.cnt + 1, txt: '' });
     };
 
     render(): React.ReactNode {
@@ -90,7 +92,7 @@ export default class Activity extends React.Component<any, any> {
                         </Card.Body>
                         <Card.Footer
                             content={<TouchableOpacity style={{ alignItems: 'flex-start' }}><Text style={{ fontWeight: 'bold' }}>我的行程</Text></TouchableOpacity>}
-                            extra={<TouchableOpacity onPress={() => console.log('全部计划')} style={{ alignItems: 'flex-end' }}><Text>全部计划</Text></TouchableOpacity>}
+                            extra={<TouchableOpacity onPress={() => { }} style={{ alignItems: 'flex-end' }}><Text> </Text></TouchableOpacity>}
                         />
                     </Card>
                     <View style={styles.buttonContainer}>
@@ -108,11 +110,17 @@ export default class Activity extends React.Component<any, any> {
                             </Text>
                         </Button>
                         {
-                            this.state.plans.slice(0, 3).map((plan, idx) => (
-                                <View key={idx}>
-                                    <Text>
-                                        {plan}
-                                    </Text>
+                            this.state.plans.map((obj) => (
+                                <View key={obj.id} style={styles.planListItem}>
+                                    <Checkbox onChange={(box) => {
+                                        this.donePlans[obj.id] = box.target.checked ? 1 : 0;
+                                        this.forceUpdate(() => { });
+                                    }}>
+                                        <Text style={[{ textDecorationLine: this.donePlans[obj.id] === 1 ? 'line-through' : 'none' }]}>
+                                            {obj.plan}
+                                        </Text>
+                                    </Checkbox>
+
                                 </View>
                             ))
                         }
@@ -176,6 +184,12 @@ const styles = StyleSheet.create({
         width: Dimensions.get('screen').width,
         margin: 10,
         paddingHorizontal: 20,
+    },
+    planListItem: {
+        width: Dimensions.get('screen').width,
+        margin: 8,
+        paddingHorizontal: 20,
+        left: 0,
     },
     twoContainer: {
         alignItems: 'center',
