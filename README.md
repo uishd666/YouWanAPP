@@ -1,79 +1,24 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+## **2024/2/19 15:32** 第一版——纯前端+WebView暂替页面
 
-# Getting Started
+- 主体框架写好了，Home页面的数据目前都是写死的，fetch后填入View发现高度不会自适应
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+- 活动里面的天气是写死的，添加计划暂时不能保存到本地，每次打开都会重置
 
-## Step 1: Start the Metro Server
+- 全程浏览地图未完善，点击反馈用的是x y坐标，有弊端，暂时不知道怎么改进
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+- 出行是对马蜂窝和腾讯地图的链接
 
-To start Metro, run the following command from the _root_ of your React Native project:
+- 我的里面有key问题，uuid和nanoid安装后不能正常使用。按钮订单优惠券等只有log反馈
 
-```bash
-# using npm
-npm start
 
-# OR using Yarn
-yarn start
-```
+App面向移动设备，前端使用了Reacct-native作为基本框架，综合使用了Javascript和Typescript作为主要编写语言，结合html和css，搭建出基本页面。同时使用webpack等辅助app的配置
 
-## Step 2: Start your Application
+icon、image主要源于网络，其中icon大部分来自阿里图标库
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
+组件方面主要运用了ant design（如Grid、Tabs）和React-native自带的一些组件（如ScrollView、ImageBackground），综合运用其他常见的第三方库（如webview、navigation）
 
-### For Android
+后端使用了Nodejs为基础的Express框架，监听前端的fetch和axios，发送数据包文件，如json文件等，实现前后端分离编写。
 
-```bash
-# using npm
-npm run android
+后端部署在nginx服务器上，并简单加装了openssl
 
-# OR using Yarn
-yarn android
-```
-
-### For iOS
-
-```bash
-# using npm
-npm run ios
-
-# OR using Yarn
-yarn ios
-```
-
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
-
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
-
-## Step 3: Modifying your App
-
-Now that you have successfully run the app, let's modify it.
-
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
-
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+目前主要争对Android开发，后续会逐步完善iOS、HarmonyOS、Web等平台。
